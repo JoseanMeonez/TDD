@@ -1,3 +1,5 @@
+using RoomBookingApp.Core.Domain;
+using RoomBookingApp.Core.Processors;
 using Shouldly;
 
 namespace RoomBookinApp.Core.Tests;
