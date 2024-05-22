@@ -1,3 +1,5 @@
+using Moq;
+using RoomBookingApp.Core.DataServices;
 using RoomBookingApp.Core.Domain;
 using RoomBookingApp.Core.Processors;
 using Shouldly;
@@ -8,12 +10,10 @@ public class RoomBookingRequestProcesorTest
 {
 	private RoomBookingRequestProcessor _processor;
 	private RoomBookingRequest _request;
+	private Mock<IRoomBookingService> _roomBookingServiceMock;
 
 	public RoomBookingRequestProcesorTest()
 	{
-		// Arrange object
-		_processor = new RoomBookingRequestProcessor();
-
 		// Arrange
 		_request = new RoomBookingRequest
 		{
@@ -21,6 +21,9 @@ public class RoomBookingRequestProcesorTest
 			Email = "test@request.com",
 			Date = new DateTime(2024, 5, 21),
 		};
+
+		_roomBookingServiceMock = new Mock<IRoomBookingService>();
+		_processor = new RoomBookingRequestProcessor(_roomBookingServiceMock.Object);
 	}
 
 	[Fact]
@@ -28,12 +31,6 @@ public class RoomBookingRequestProcesorTest
 	{
 		// Act
 		RoomBookingResult result = _processor.BookRoom(_request);
-
-		// Assert
-		Assert.NotNull(result);
-		Assert.Equal(_request.FullName, result.FullName);
-		Assert.Equal(_request.Email, result.Email);
-		Assert.Equal(_request.Date, result.Date);
 
 		// Shoudly
 		result.ShouldNotBeNull();
