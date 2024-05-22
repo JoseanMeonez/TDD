@@ -7,38 +7,39 @@ namespace RoomBookinApp.Core.Tests;
 public class RoomBookingRequestProcesorTest
 {
 	private RoomBookingRequestProcessor _processor;
+	private RoomBookingRequest _request;
 
 	public RoomBookingRequestProcesorTest()
 	{
 		// Arrange object
 		_processor = new RoomBookingRequestProcessor();
-	}
 
-	[Fact]
-	public void ShouldReturnRoomBookingResponseWithRequestValues()
-	{
 		// Arrange
-		var request = new RoomBookingRequest
+		_request = new RoomBookingRequest
 		{
 			FullName = "Test",
 			Email = "test@request.com",
 			Date = new DateTime(2024, 5, 21),
 		};
+	}
 
+	[Fact]
+	public void ShouldReturnRoomBookingResponseWithRequestValues()
+	{
 		// Act
-		RoomBookingResult result = _processor.BookRoom(request);
+		RoomBookingResult result = _processor.BookRoom(_request);
 
 		// Assert
 		Assert.NotNull(result);
-		Assert.Equal(request.FullName, result.FullName);
-		Assert.Equal(request.Email, result.Email);
-		Assert.Equal(request.Date, result.Date);
+		Assert.Equal(_request.FullName, result.FullName);
+		Assert.Equal(_request.Email, result.Email);
+		Assert.Equal(_request.Date, result.Date);
 
 		// Shoudly
 		result.ShouldNotBeNull();
-		result.FullName.ShouldBe(request.FullName);
-		result.Email.ShouldBe(request.Email);
-		result.Date.ShouldBe(request.Date);
+		result.FullName.ShouldBe(_request.FullName);
+		result.Email.ShouldBe(_request.Email);
+		result.Date.ShouldBe(_request.Date);
 	}
 
 	[Fact]
