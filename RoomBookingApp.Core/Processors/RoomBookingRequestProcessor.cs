@@ -14,10 +14,7 @@ public class RoomBookingRequestProcessor
 
 	public RoomBookingResult BookRoom(RoomBookingRequest bookingRequest)
 	{
-		if (bookingRequest is null)
-		{
-			throw new ArgumentNullException(nameof(bookingRequest));
-		}
+		ArgumentNullException.ThrowIfNull(bookingRequest);
 
 		_roomBookingService.Save(CreateRoomBookingObject<RoomBooking>(bookingRequest));
 
