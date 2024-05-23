@@ -46,4 +46,24 @@ public class RoomBookingRequestProcesorTest
 
 		exception.ParamName.ShouldBe("bookingRequest");
 	}
+
+	[Fact]
+	public void ShouldSaveRoomBookingRequest()
+	{
+		RoomBooking savedBooking = null;
+		_roomBookingServiceMock.Setup(q => q.Save(It.IsAny<RoomBooking>()))
+			.Callback<RoomBooking>(booking =>
+			{
+				savedBooking = booking;
+			});
+
+		_processor.BookRoom(_request);
+
+		_roomBookingServiceMock.Verify(q => q.Save(It.IsAny<RoomBooking>()), Times.Once);
+
+		savedBooking.ShouldNotBeNull();
+		savedBooking.FullName.ShouldBe(_request.FullName);
+		savedBooking.Email.ShouldBe(_request.Email);
+		savedBooking.Date.ShouldBe(_request.Date);
+	}
 }
