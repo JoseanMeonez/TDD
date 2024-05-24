@@ -17,7 +17,12 @@ public class RoomBookingRequestProcessor
 	{
 		ArgumentNullException.ThrowIfNull(bookingRequest);
 
-		_roomBookingService.Save(CreateRoomBookingObject<RoomBooking>(bookingRequest));
+		var availableRooms = _roomBookingService.GetAvailableRooms(bookingRequest.Date);
+
+		if (availableRooms.Any())
+		{
+			_roomBookingService.Save(CreateRoomBookingObject<RoomBooking>(bookingRequest));
+		}
 
 		return CreateRoomBookingObject<RoomBookingResult>(bookingRequest);
 	}
