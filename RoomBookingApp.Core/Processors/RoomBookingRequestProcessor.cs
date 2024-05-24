@@ -21,7 +21,11 @@ public class RoomBookingRequestProcessor
 
 		if (availableRooms.Any())
 		{
-			_roomBookingService.Save(CreateRoomBookingObject<RoomBooking>(bookingRequest));
+			var room = availableRooms.First();
+			var roomBooking = CreateRoomBookingObject<RoomBooking>(bookingRequest);
+			roomBooking.RoomId = room.Id;
+
+			_roomBookingService.Save(roomBooking);
 		}
 
 		return CreateRoomBookingObject<RoomBookingResult>(bookingRequest);
