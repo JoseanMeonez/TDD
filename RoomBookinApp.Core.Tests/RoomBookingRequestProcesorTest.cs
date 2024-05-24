@@ -1,6 +1,7 @@
 using Moq;
 using RoomBookingApp.Core.DataServices;
 using RoomBookingApp.Core.Domain;
+using RoomBookingApp.Core.Models;
 using RoomBookingApp.Core.Processors;
 using Shouldly;
 
@@ -66,4 +67,6 @@ public class RoomBookingRequestProcesorTest
 		savedBooking.Email.ShouldBe(_request.Email);
 		savedBooking.Date.ShouldBe(_request.Date);
 	}
+
+
 }
