@@ -10,6 +10,7 @@ namespace RoomBookinApp.Core.Tests;
 
 public class RoomBookingRequestProcesorTest
 {
+	// Injected objects and service
 	private RoomBookingRequestProcessor _processor;
 	private RoomBookingRequest _request;
 	private Mock<IRoomBookingService> _roomBookingServiceMock;
@@ -26,6 +27,7 @@ public class RoomBookingRequestProcesorTest
 		};
 		_availableRooms = new List<Room>() { new() { Id = 1 } };
 
+		// Mock data
 		_roomBookingServiceMock = new Mock<IRoomBookingService>();
 		_roomBookingServiceMock.Setup(q => q.GetAvailableRooms(_request.Date))
 			.Returns(_availableRooms);
