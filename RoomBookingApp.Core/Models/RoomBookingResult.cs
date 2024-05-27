@@ -1,6 +1,8 @@
-﻿namespace RoomBookingApp.Core.Models;
+﻿using RoomBookingApp.Core.Enums;
+
+namespace RoomBookingApp.Core.Models;
 
 public class RoomBookingResult : RoomBookingBase
 {
-
+	public BookingResultFlag Flag { get; set; }
 }
