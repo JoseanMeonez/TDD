@@ -29,6 +29,7 @@ public class RoomBookingRequestProcessor
 
 			_roomBookingService.Save(roomBooking);
 
+			result.RoomBookingId = roomBooking.Id;
 			result.Flag = BookingResultFlag.Success;
 		}
 		else
