@@ -1,12 +1,12 @@
 using Moq;
 using RoomBookingApp.Core.DataServices;
-using RoomBookingApp.Core.Domain;
 using RoomBookingApp.Core.Enums;
 using RoomBookingApp.Core.Models;
 using RoomBookingApp.Core.Processors;
+using RoomBookingApp.Domain;
 using Shouldly;
 
-namespace RoomBookinApp.Core.Tests;
+namespace RoomBookinApp.Core;
 
 public class RoomBookingRequestProcesorTest
 {
@@ -90,14 +90,12 @@ public class RoomBookingRequestProcesorTest
 	[InlineData(BookingResultFlag.Success, true)]
 	public void ShouldReturnSuccessOrFailureFlagInResult(BookingResultFlag bookingSuccessFlag, bool isAvailable)
 	{
-        if (!isAvailable)
-        {
+		if (!isAvailable)
 			_availableRooms.Clear();
-        }
 
 		var result = _processor.BookRoom(_request);
 		bookingSuccessFlag.ShouldBe(result.Flag);
-    }
+	}
 
 	[Theory]
 	[InlineData(1, true)]
@@ -105,19 +103,17 @@ public class RoomBookingRequestProcesorTest
 	public void ShouldReturnRoomBookingIdInResult(int? roomBookingId, bool isAvailable)
 	{
 		if (!isAvailable)
-		{
 			_availableRooms.Clear();
-		}
-        else
-        {
+		else
+		{
 			_roomBookingServiceMock.Setup(q => q.Save(It.IsAny<RoomBooking>()))
 				.Callback<RoomBooking>(booking =>
 				{
 					booking.Id = roomBookingId!.Value;
 				});
-        }
+		}
 
 		var result = _processor.BookRoom(_request);
 		result.RoomBookingId.ShouldBe(roomBookingId);
-    }
+	}
 }
