@@ -5,7 +5,11 @@ VisualStudioVersion = 17.10.34818.151
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoomBookingApp.Core.Tests", "RoomBookinApp.Core.Tests\RoomBookingApp.Core.Tests.csproj", "{9E8645AD-AFC3-4EA2-9FC3-11A56477A8B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomBookingApp.Core", "RoomBookingApp.Core\RoomBookingApp.Core.csproj", "{B18326C1-473F-4B59-A379-09E9C767508E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoomBookingApp.Core", "RoomBookingApp.Core\RoomBookingApp.Core.csproj", "{B18326C1-473F-4B59-A379-09E9C767508E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomBookingApp.Domain", "RoomBookingApp.Domain\RoomBookingApp.Domain.csproj", "{209ACD13-C884-44E0-BA57-59CC92C4A047}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomBookingApp.Persistence", "RoomBookingApp.Persistence\RoomBookingApp.Persistence.csproj", "{E4D57B53-29A8-40E0-B8DB-27D0E59529B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{B18326C1-473F-4B59-A379-09E9C767508E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B18326C1-473F-4B59-A379-09E9C767508E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B18326C1-473F-4B59-A379-09E9C767508E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{209ACD13-C884-44E0-BA57-59CC92C4A047}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{209ACD13-C884-44E0-BA57-59CC92C4A047}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{209ACD13-C884-44E0-BA57-59CC92C4A047}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{209ACD13-C884-44E0-BA57-59CC92C4A047}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4D57B53-29A8-40E0-B8DB-27D0E59529B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4D57B53-29A8-40E0-B8DB-27D0E59529B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4D57B53-29A8-40E0-B8DB-27D0E59529B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4D57B53-29A8-40E0-B8DB-27D0E59529B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
