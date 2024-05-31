@@ -13,15 +13,14 @@ public class RoomBookingService : IRoomBookingService
 
 	public IEnumerable<Room> GetAvailableRooms(DateTime date)
 	{
-		var unAvailableRooms = _context.RoomBookings.Where(rb => rb.Date == date).Select(rb => rb.RoomId).ToList();
-
-		var availableRooms = _context.Rooms.Where(r => unAvailableRooms.Contains(r.Id) == false).ToList();
+		var availableRooms = _context.Rooms.Where(r => r.RoomBookings.Any(rb => rb.Date == date) == false).AsEnumerable();
 
 		return availableRooms;
 	}
 
 	public void Save(RoomBooking roomBooking)
 	{
-		throw new NotImplementedException();
+		_context.Add(roomBooking);
+		_context.SaveChanges();
 	}
 }
