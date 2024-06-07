@@ -5,7 +5,7 @@ using Shouldly;
 
 namespace RoomBookingApp.Api.Tests;
 
-public class UnitTest1
+public class WeatherForecastControllerTest
 {
 	[Fact]
 	public void ShouldReturnForecastResults()
