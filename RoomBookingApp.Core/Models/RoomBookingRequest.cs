@@ -1,8 +1,7 @@
-﻿namespace RoomBookingApp.Core.Models;
+﻿using RoomBookingApp.Domain.BaseModels;
 
-public class RoomBookingRequest
+namespace RoomBookingApp.Core.Models;
+
+public class RoomBookingRequest : RoomBookingBase
 {
-	public string FullName { get; set; } = string.Empty;
-	public string Email { get; set; } = string.Empty;
-	public DateTime Date { get; set; }
 }
