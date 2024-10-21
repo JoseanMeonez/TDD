@@ -15,8 +15,21 @@ public class RoomBookingController : ControllerBase
 		_roomBookingProcessor = roomBookingProcessor;
 	}
 
-	public async Task<IActionResult> BookRoom(RoomBookingRequest request)
+	[HttpPost]
+	public Task<IActionResult> BookRoom(RoomBookingRequest request)
 	{
-		throw new NotImplementedException();
+		if (ModelState.IsValid)
+		{
+			RoomBookingResult result = _roomBookingProcessor.BookRoom(request);
+
+			if (result.Flag is Core.Enums.BookingResultFlag.Success)
+			{
+				return Task.FromResult<IActionResult>(Ok(result));
+			}
+
+			ModelState.AddModelError(nameof(RoomBookingRequest.Date), "No rooms available for given date.");
+		}
+
+		return Task.FromResult<IActionResult>(BadRequest(ModelState));
 	}
 }
