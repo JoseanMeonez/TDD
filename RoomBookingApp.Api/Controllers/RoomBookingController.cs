@@ -6,21 +6,14 @@ namespace RoomBookingApp.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class RoomBookingController : ControllerBase
+public class RoomBookingController(IRoomBookingRequestProcessor roomBookingProcessor) : ControllerBase
 {
-	private IRoomBookingRequestProcessor _roomBookingProcessor;
-
-	public RoomBookingController(IRoomBookingRequestProcessor roomBookingProcessor)
-	{
-		_roomBookingProcessor = roomBookingProcessor;
-	}
-
 	[HttpPost]
 	public Task<IActionResult> BookRoom(RoomBookingRequest request)
 	{
 		if (ModelState.IsValid)
 		{
-			RoomBookingResult result = _roomBookingProcessor.BookRoom(request);
+			RoomBookingResult result = roomBookingProcessor.BookRoom(request);
 
 			if (result.Flag is Core.Enums.BookingResultFlag.Success)
 			{

@@ -3,13 +3,8 @@ using RoomBookingApp.Domain;
 
 namespace RoomBookingApp.Persistence;
 
-public class RoomBookingAppDbContext : DbContext
+public class RoomBookingAppDbContext(DbContextOptions<RoomBookingAppDbContext> options) : DbContext(options)
 {
-	public RoomBookingAppDbContext(DbContextOptions<RoomBookingAppDbContext> options) : base(options)
-	{
-
-	}
-
 	public DbSet<Room> Rooms { get; set; }
 	public DbSet<RoomBooking> RoomBookings { get; set; }
 

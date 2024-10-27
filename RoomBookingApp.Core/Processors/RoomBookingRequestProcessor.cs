@@ -6,20 +6,13 @@ using RoomBookingApp.Domain.BaseModels;
 
 namespace RoomBookingApp.Core.Processors;
 
-public class RoomBookingRequestProcessor : IRoomBookingRequestProcessor
+public class RoomBookingRequestProcessor(IRoomBookingService roomBookingService) : IRoomBookingRequestProcessor
 {
-	private readonly IRoomBookingService _roomBookingService;
-
-	public RoomBookingRequestProcessor(IRoomBookingService roomBookingService)
-	{
-		_roomBookingService = roomBookingService;
-	}
-
 	public RoomBookingResult BookRoom(RoomBookingRequest bookingRequest)
 	{
 		ArgumentNullException.ThrowIfNull(bookingRequest);
 
-		var availableRooms = _roomBookingService.GetAvailableRooms(bookingRequest.Date);
+		var availableRooms = roomBookingService.GetAvailableRooms(bookingRequest.Date);
 		var result = CreateRoomBookingObject<RoomBookingResult>(bookingRequest);
 
 		if (availableRooms.Any())
@@ -28,7 +21,7 @@ public class RoomBookingRequestProcessor : IRoomBookingRequestProcessor
 			var roomBooking = CreateRoomBookingObject<RoomBooking>(bookingRequest);
 			roomBooking.RoomId = room.Id;
 
-			_roomBookingService.Save(roomBooking);
+			roomBookingService.Save(roomBooking);
 
 			result.RoomBookingId = roomBooking.Id;
 			result.Flag = BookingResultFlag.Success;
