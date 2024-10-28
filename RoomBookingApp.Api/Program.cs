@@ -13,13 +13,19 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 SqliteConnection connection = new SqliteConnection("DataSource=:memory:");
-
 connection.Open();
 
 builder.Services.AddDbContext<RoomBookingAppDbContext>(opt => opt.UseSqlite(connection));
 
-builder.Services.AddScoped<IRoomBookingService, RoomBookingService>();
+// Ensure Database created
+DbContextOptionsBuilder<RoomBookingAppDbContext> dbBuilder = new();
+dbBuilder.UseSqlite(connection);
 
+using RoomBookingAppDbContext context = new(dbBuilder.Options);
+context.Database.EnsureCreated();
+
+// Inject application services
+builder.Services.AddScoped<IRoomBookingService, RoomBookingService>();
 builder.Services.AddScoped<IRoomBookingRequestProcessor, RoomBookingRequestProcessor>();
 
 WebApplication app = builder.Build();
