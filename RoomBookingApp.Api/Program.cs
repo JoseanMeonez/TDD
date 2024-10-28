@@ -5,16 +5,15 @@ using RoomBookingApp.Core.Processors;
 using RoomBookingApp.Persistence;
 using RoomBookingApp.Persistence.Repositories;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var connection = new SqliteConnection("DataSource=:memory:");
+SqliteConnection connection = new SqliteConnection("DataSource=:memory:");
+
 connection.Open();
 
 builder.Services.AddDbContext<RoomBookingAppDbContext>(opt => opt.UseSqlite(connection));
@@ -23,7 +22,7 @@ builder.Services.AddScoped<IRoomBookingService, RoomBookingService>();
 
 builder.Services.AddScoped<IRoomBookingRequestProcessor, RoomBookingRequestProcessor>();
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
